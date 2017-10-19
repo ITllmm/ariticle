@@ -1,0 +1,57 @@
+一：新建laravel项目以及配置
+1:生成laravel项目
+  You need to install the laravel project on the virtual machine: php new article
+
+2:配置服务器
+　　　　虚拟机：cd /etc/nginx/vhost
+		cp wp.com.conf lm.com.conf
+		nano lm.com.conf
+		     servername: .mu.com
+		     root /home/www/mu.com
+		sudo service nginx reload
+
+　　　　　　　主机上:  nano /etc/hosts
+	       添加： 192.168.33.1 mu.com
+
+3: cp .env.example .env
+
+4:  生成app_key
+  cd sites/article上输入命令：php article key:generate
+
+5:浏览器访问　ok
+
+
+1:需要在虚拟机该项目下去php　artisan
+  php artisan list://命令全部
+　　php artisan front/LoginController :会自动生成文件夹front以及LoginController.php
+
+  控制器配置好了
+
+
+2：注册登录
+　（１）路由的问题
+         注册界面： action=""写的内容就等效于Route::get()的内容
+　　　　　　　　　　　　　　　　　　　　　view("")和redirect("")需要写完整,但是注意/front/login和front/login的区别
+　　　　　　　　　　　　　　　　　　　　　　　　　　　/front/login:是以'article.com'来查找访问
+　　　　　　　　　　　　　　　　　　　　　　　　　　　front/login是以当前的url退出一个来查找访问：比如 /front/person/set来退出话，就会跳到/front/person/front/login
+
+　　　(2)Auth 门脸类来获取当前登录的用户信息（配置的话都配置好了。关联的模型是user.php）
+
+　　　(3)关联模型：是模型与模型之间的关联，实现数据表之间的关联
+　　　
+　　　　　PostController.php
+    　　　使用了关联模型来实现了:获取当前用户下的所有的文章
+
+   (1)(2)(3):目前实现登录与注册。（第六章）
+　　　　　　　　　登录判断使用了Auth门脸类来进行判断
+　　　　　　　　　得到文章数涉及到关联模型
+　　　　　　　　　界面的section技术来模块分成
+　　　　　　　　　路由
+
+
+　　接下来做下文章的增删改查，之后才可以做下权限policy(第四章)
+
+
+
+
+
